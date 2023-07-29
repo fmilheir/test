@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filipe <filipe@student.42.fr>              +#+  +:+       +#+         #
+#    By: fmilheir <fmilheir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:27:36 by fmilheir          #+#    #+#              #
-#    Updated: 2023/07/29 17:32:55 by filipe           ###   ########.fr        #
+#    Updated: 2023/07/29 20:15:40 by fmilheir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g #-fsanitize=thread
 NAME = philo
 HEADER = philo.h
 SRC = philo.c utils.c parsing.c routine.c initialisation.c create.c \
@@ -35,6 +35,6 @@ fclean : clean
 re : fclean all
 
 r:
-	make re && clear && ./philo 200 800 200 200
+	make re && clear && valgrind --tool=helgrind ./philo 4 405 200 200
 
-.PHONY: all fclean clean re 
+.PHONY: all fclean clean retool=helgrind

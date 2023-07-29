@@ -45,7 +45,6 @@ void	create_philo(t_data *data)
 	check_death(philo);
 	kill_philo(philo);
 	i = -1;
-	pthread_mutex_unlock(&philo->data->mtx_print);
 	while (++i < data->n_philo)
 		pthread_join(data->thr[i], NULL);
 	ft_free(philo);

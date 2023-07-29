@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: By: filipe <filipe@student.42.fr>             +#+  +:+       +#+        */
+/*   By: filipe <filipe@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:55:48 by aaghbal           #+#    #+#             */
 /*   Updated: 2023/07/24 11:47:56 by aaghbal          ###   ########.fr       */
@@ -55,6 +55,7 @@ void	check_death(t_philo *philo)
 			pthread_mutex_unlock(&philo->mtx_leat);
 			pthread_mutex_lock(&philo->data->mtx_print);
 			printf("%04lld ms : philo %d died\n", get_time(philo), philo->index);
+			pthread_mutex_unlock(&philo->data->mtx_print);
 			break ;
 		}
 		else if (philo->data->n_of_eat && check_n_eat(ph2))

@@ -68,8 +68,8 @@ void	*routine(void *philo)
 	t_philo	*ph;
 
 	ph = (t_philo *)philo;
-	if (ph->index % 2 == 1)
-		usleep(50);
+	//if (ph->index % 2 == 1)
+	//	usleep(50);
 	while (1)
 	{
 		if (break_thr(ph))
@@ -78,15 +78,28 @@ void	*routine(void *philo)
 		ft_printf(ph, "has taken a fork", 0);
 		if (check_onethr(ph))
 			break ;
-		pthread_mutex_lock(&ph->data->mtx[(ph->index) % ph->data->n_philo]);
-		ft_printf(ph, "has taken a fork", 0);
-		ft_printf(ph, "is eating", 1);
-		ft_usleep(ph, ph->time_eat * 1000);
+		if (ph->index % 2  == 0)
+		{
+			//printf("my index is pair");
+			pthread_mutex_lock(&ph->data->mtx[ph->index]);
+			ft_printf(ph, "has taken a fork", 0);
+			ft_printf(ph, "is eating", 1);
+			ft_usleep(ph, ph->time_eat * 1000);
+			pthread_mutex_unlock(&ph->data->mtx[ph->index]);
+		}
+		else
+		{
+			pthread_mutex_lock(&ph->data->mtx[ph->index]);
+			ft_printf(ph, "has taken a fork", 0);
+			ft_printf(ph, "is eating", 1);
+			ft_usleep(ph, ph->time_eat * 1000);
+			pthread_mutex_unlock(&ph->data->mtx[ph->index]);
+		}
 		pthread_mutex_unlock(&ph->data->mtx[ph->index - 1]);
-		pthread_mutex_unlock(&ph->data->mtx[ph->index % ph->data->n_philo]);
 		ft_printf(ph, "is sleeping", 0);
 		ft_usleep(ph, ph->time_slep * 1000);
 		ft_printf(ph, "is thinking", 0);
 	}
 	return (NULL);
 }
+
