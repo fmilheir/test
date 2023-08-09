@@ -38,14 +38,14 @@ void	create_philo(t_data *data)
 		data->i++;
 	}
 	data->mtx = malloc(sizeof(pthread_mutex_t) * data->n_philo);
-	if (!data->i)
+	if (!data->mtx)
 		return ;
 	create_mtx(philo);
 	create_thr(philo, data);
 	check_death(philo);
 	kill_philo(philo);
 	i = -1;
-	while (++i < data->n_philo)
+	while (++i < data->n_philo - 1)
 		pthread_join(data->thr[i], NULL);
 	ft_free(philo);
 }

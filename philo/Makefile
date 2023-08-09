@@ -6,7 +6,7 @@
 #    By: fmilheir <fmilheir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:27:36 by fmilheir          #+#    #+#              #
-#    Updated: 2023/07/29 20:15:40 by fmilheir         ###   ########.fr        #
+#    Updated: 2023/08/09 18:39:29 by fmilheir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ fclean : clean
 re : fclean all
 
 r:
-	make re && clear && valgrind --tool=helgrind ./philo 4 405 200 200
+	make re && clear && ./philo 4 410 200 200
+	
+#105 800 200 200
 
 .PHONY: all fclean clean retool=helgrind
